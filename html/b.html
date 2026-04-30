@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Love 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --rose: #e8334a;
+    --blush: #f7a8b8;
+    --petal: #fce4ec;
+    --cream: #fff0f3;
+    --gold: #d4a0a8;
+    --deep: #8b1a2f;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── Floating Hearts ── */
+  #hearts-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
+  }
+
+  .float-heart {
+    position: absolute;
+    bottom: -60px;
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: floatUp linear infinite;
+    user-select: none;
+  }
+
+  @keyframes floatUp {
+    0%   { transform: translateY(0) rotate(-10deg) scale(0.8); opacity: 0; }
+    10%  { opacity: 0.7; }
+    90%  { opacity: 0.4; }
+    100% { transform: translateY(-100vh) rotate(20deg) scale(1.2); opacity: 0; }
+  }
+
+  /* ── Music Toggle ── */
+  #music-btn {
+    position: fixed;
+    top: 20px; right: 20px;
+    z-index: 1000;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.7);
+    background: rgba(232, 51, 74, 0.35);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s, background 0.3s;
+    box-shadow: 0 4px 20px rgba(232,51,74,0.3);
+  }
+  #music-btn:hover { transform: scale(1.1); background: rgba(232,51,74,0.6); }
+
+  /* ════════════════════════════
+     SLIDE 1 — HEART WELCOME
+  ════════════════════════════ */
+  #slide1 {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #ff6b8a 0%, #e8334a 35%, #c0002a 65%, #7a0020 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #slide1::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 40%, rgba(255,200,210,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse at 75% 70%, rgba(120,0,30,0.25) 0%, transparent 55%);
+  }
+
+  .slide1-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+    position: relative; z-index: 2;
+  }
+
+  .slide1-sub {
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+    position: relative; z-index: 2;
+  }
+
+  /* SVG Heart */
+  .heart-wrap {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column;
+    align-items: center;
+  }
+
+  .arrow-hint {
+    font-size: 1.6rem;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 18px;
+    animation: bounceDown 1.4s ease-in-out infinite;
+  }
+
+  @keyframes bounceDown {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50%       { transform: translateY(10px); opacity: 1; }
+  }
+
+  .heart {
+    width: 180px; height: 180px;
+    cursor: pointer;
+    animation: heartbeat 1.4s ease-in-out infinite;
+    transition: transform 0.1s;
+    filter: drop-shadow(0 8px 32px rgba(0,0,0,0.35));
+    display: block;
+  }
+
+  .heart:active { transform: scale(0.92) !important; animation: none; }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14%       { transform: scale(1.13); }
+    28%       { transform: scale(1); }
+    42%       { transform: scale(1.08); }
+    70%       { transform: scale(1); }
+  }
+
+  .heart-label {
+    margin-top: 28px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.4rem;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.05em;
+    animation: fadeGlow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes fadeGlow {
+    0%   { opacity: 0.6; text-shadow: none; }
+    100% { opacity: 1; text-shadow: 0 0 18px rgba(255,200,210,0.9); }
+  }
+
+  /* ════════════════════════════
+     SLIDE 2 — LOVE LETTER
+  ════════════════════════════ */
+  #slide2 {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    background: #fff0f3;
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #slide2::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 10% 10%, rgba(252,228,236,0.8) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 90%, rgba(247,168,184,0.5) 0%, transparent 50%);
+  }
+
+  .letter-card {
+    position: relative; z-index: 2;
+    background: rgba(255,255,255,0.92);
+    border-radius: 24px;
+    padding: clamp(32px, 6vw, 64px) clamp(28px, 5vw, 56px);
+    max-width: 680px; width: 100%;
+    box-shadow:
+      0 0 0 1px rgba(232,51,74,0.1),
+      0 8px 40px rgba(232,51,74,0.15),
+      0 0 80px rgba(247,168,184,0.25);
+    opacity: 0;
+    transform: scale(0.93) translateY(24px);
+    transition: opacity 0.9s cubic-bezier(.22,1,.36,1), transform 0.9s cubic-bezier(.22,1,.36,1);
+  }
+
+  .letter-card.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  .letter-deco {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    letter-spacing: 0.3em;
+    color: var(--blush);
+  }
+
+  .letter-heading {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--rose);
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .letter-divider {
+    width: 80px; height: 1px;
+    background: linear-gradient(to right, transparent, var(--blush), transparent);
+    margin: 0 auto 28px;
+  }
+
+  .letter-body {
+    font-size: clamp(1rem, 2.2vw, 1.13rem);
+    line-height: 1.95;
+    color: #5a2030;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .letter-body p { margin-bottom: 1.1em; }
+
+  .letter-sign {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(1.3rem, 3vw, 1.7rem);
+    color: var(--rose);
+    text-align: right;
+    margin-top: 24px;
+  }
+
+  .next-btn {
+    display: block;
+    margin: 36px auto 0;
+    padding: 14px 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.15em;
+    color: #fff;
+    background: linear-gradient(135deg, #e8334a, #c0002a);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(232,51,74,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .next-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(232,51,74,0.5); }
+  .next-btn:active { transform: translateY(0); }
+
+  /* ════════════════════════════
+     SLIDE 3 — FLOWER & LANGUAGES
+  ════════════════════════════ */
+  #slide3 {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #ffe0e9 0%, #ffc8d8 30%, #ffb3c6 60%, #ff8fab 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 50px 20px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .corner-bloom {
+    position: absolute;
+    font-size: 3rem;
+    animation: bloom 3s ease-in-out infinite alternate;
+  }
+  .corner-bloom.tl { top: 16px; left: 16px; }
+  .corner-bloom.br { bottom: 16px; right: 16px; animation-delay: 1.5s; }
+
+  @keyframes bloom {
+    0%   { transform: scale(0.85) rotate(-8deg); opacity: 0.7; }
+    100% { transform: scale(1.15) rotate(8deg);  opacity: 1; }
+  }
+
+  .slide3-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    color: var(--deep);
+    text-shadow: 0 2px 12px rgba(139,26,47,0.2);
+    margin-bottom: 30px;
+    position: relative; z-index: 2;
+  }
+
+  .lang-grid-wrap {
+    width: min(820px, 94vw);
+    height: min(440px, 70vh);
+    position: relative; z-index: 2;
+    background: rgba(255,255,255,0.45);
+    border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(139,26,47,0.15);
+    overflow: hidden;
+    backdrop-filter: blur(6px);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  /* Left column: 5 stacked cells */
+  .lang-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lang-cell {
+    flex: 1;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    border: 1px solid rgba(232,51,74,0.22);
+    padding: 8px 10px;
+    transition: background 0.3s;
+  }
+  .lang-cell:hover { background: rgba(232,51,74,0.07); }
+
+  .lang-cell .lang-name {
+    font-size: clamp(0.55rem, 1.2vw, 0.72rem);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--blush);
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 4px;
+  }
+
+  .lang-cell .lang-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(0.9rem, 2vw, 1.35rem);
+    color: var(--deep);
+    text-align: center;
+  }
+
+  /* Middle column: single merged bouquet cell */
+  .bouquet-col {
+    display: flex;
+    align-items: center; justify-content: center;
+    border-left: 2px solid rgba(232,51,74,0.4);
+    border-right: 2px solid rgba(232,51,74,0.4);
+    background: rgba(255,240,243,0.55);
+  }
+
+  .bouquet-cell {
+    font-size: clamp(4rem, 10vw, 7rem);
+    animation: bouquetPulse 2s ease-in-out infinite;
+    line-height: 1;
+  }
+
+  @keyframes bouquetPulse {
+    0%, 100% { transform: scale(1) rotate(-3deg); }
+    50%       { transform: scale(1.08) rotate(3deg); }
+  }
+
+  /* ════════════════════════════
+     SLIDE 4 — PHOTO + MESSAGE
+  ════════════════════════════ */
+  #slide4 {
+    min-height: 100vh;
+    position: relative;
+    display: flex; align-items: flex-start;
+    overflow: hidden;
+  }
+
+  #slide4 .bg-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    filter: brightness(0.82) saturate(1.1);
+  }
+
+  #slide4 .bg-fallback {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #2d0a14 0%, #7a0020 40%, #c0002a 70%, #e8334a 100%);
+    z-index: 0;
+  }
+
+  #slide4 .overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.45) 0%, transparent 60%);
+    z-index: 1;
+  }
+
+  .slide4-text {
+    position: relative; z-index: 2;
+    padding: clamp(40px, 8vw, 80px) clamp(30px, 6vw, 70px);
+    max-width: 520px;
+  }
+
+  .slide4-text h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    color: #ff6b8a;
+    line-height: 1.35;
+    text-shadow:
+      0 0 20px rgba(232,51,74,0.9),
+      0 0 50px rgba(232,51,74,0.5),
+      0 2px 6px rgba(0,0,0,0.6);
+    margin-bottom: 20px;
+  }
+
+  .slide4-text p {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+    color: #ffb3c6;
+    text-shadow:
+      0 0 18px rgba(232,51,74,0.8),
+      0 0 40px rgba(232,51,74,0.4),
+      0 2px 6px rgba(0,0,0,0.5);
+    line-height: 1.4;
+  }
+
+  /* sparkle ring around slide4 */
+  .slide4-sparkles {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  }
+  .sparkle {
+    position: absolute;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,200,220,0.9);
+    box-shadow: 0 0 6px 2px rgba(255,200,220,0.6);
+    animation: twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50%       { opacity: 1; transform: scale(1.3); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating hearts layer -->
+<div id="hearts-canvas"></div>
+
+<!-- Music toggle -->
+<button id="music-btn" title="Toggle Music" aria-label="Toggle Music">🎵</button>
+
+<!-- Hidden audio (replace src with your MP3 URL) -->
+<audio id="bg-music" loop preload="none">
+  <source src="finding-her-official.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ══════════════ SLIDE 1 ══════════════ -->
+<section id="slide1">
+  <div class="slide1-title">A Little Something For You</div>
+  <div class="slide1-sub">click the heart to begin</div>
+  <div class="heart-wrap">
+    <div class="arrow-hint">↓</div>
+    <svg class="heart" id="main-heart" role="button" aria-label="Click to continue"
+         viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 85 C50 85 5 55 5 28 C5 14 16 5 28 5 C36 5 44 10 50 18 C56 10 64 5 72 5 C84 5 95 14 95 28 C95 55 50 85 50 85 Z"
+            fill="white"/>
+    </svg>
+    <div class="heart-label">Click Me 💕</div>
+  </div>
+</section>
+
+<!-- ══════════════ SLIDE 2 ══════════════ -->
+<section id="slide2">
+  <div class="letter-card" id="letter-card">
+    <div class="letter-deco">· ♡ · ♡ · ♡ ·</div>
+    <h2 class="letter-heading">A Letter From My Heart</h2>
+    <div class="letter-divider"></div>
+    <div class="letter-body">
+      <p>To my dearest Your Love,</p>
+      <p>On this beautiful day that the world gifted you to it — and to me — I find myself overwhelmed with a love so full it spills over every quiet moment, every ordinary morning, every glance across the room.</p>
+      <p>You are everything I never thought to ask for and everything I never want to stop finding. Your laugh is my favourite sound. Your presence is my favourite place. And your love — your love is the softest, bravest thing I have ever known.</p>
+      <p>I am so endlessly proud of you. Of the strength you carry so quietly, the light you give so freely, the way you love with your whole heart without even realising how rare that is.</p>
+      <p>Today and every day, I choose you. I choose us. I choose every version of you — the radiant one, the tired one, the dreaming one, the one who needs to be held.</p>
+      <p>Happy Birthday, my love. May this year give back even a fraction of the joy you bring to everyone around you — especially to me.</p>
+    </div>
+    <div class="letter-sign">Forever yours, Your Baccha ❤️</div>
+    <button class="next-btn" onclick="scrollToSlide('slide3')">Next 💖</button>
+  </div>
+</section>
+
+<!-- ══════════════ SLIDE 3 ══════════════ -->
+<section id="slide3">
+  <h2 class="slide3-title">Flower for you 💖</h2>
+
+  <div class="lang-grid-wrap" id="lang-grid-wrap">
+    <!-- filled by JS -->
+  </div>
+
+  <button class="next-btn" style="margin-top:28px;" onclick="scrollToSlide('slide4')">Final Surprise 🎁</button>
+</section>
+
+<!-- ══════════════ SLIDE 4 ══════════════ -->
+<section id="slide4">
+  <div class="bg-fallback"></div>
+  <!-- Replace the src below with your own romantic photo URL -->
+  <img class="bg-img" src="R.png" alt="romantic background" onerror="this.style.display='none'">
+  <div class="overlay"></div>
+  <div class="slide4-sparkles" id="sparkles"></div>
+  <div class="slide4-text">
+    <h2>Happy Birthday<br>My Baccha ❤️</h2>
+    <p>Love You Forever 💖</p>
+  </div>
+</section>
+
+<script>
+  /* ── Language Grid ── */
+  const leftLangs  = [
+    { name: 'English',  text: 'I Love You' },
+    { name: 'Hindi',    text: 'मैं तुमसे प्यार करता हूँ' },
+    { name: 'Bengali',  text: 'আমি তোমাকে ভালোবাসি' },
+    { name: 'Marathi',  text: 'मी तुझ्यावर प्रेम करतो' },
+    { name: 'Telugu',   text: 'నేను నిన్ను ప్రేమిస్తున్నాను' },
+  ];
+  const rightLangs = [
+    { name: 'Tamil',    text: 'நான் உன்னை காதலிக்கிறேன்' },
+    { name: 'Gujarati', text: 'હું તને પ્રેમ કરું છું' },
+    { name: 'Urdu',     text: 'میں تم سے محبت کرتا ہوں' },
+    { name: 'Kannada',  text: 'ನಾನು ನಿನ್ನನ್ನು ಪ್ರೀತಿಸುತ್ತೇನೆ' },
+    { name: 'Odia',     text: 'ମୁଁ ତୁମକୁ ଭଲ ପାଏ' },
+  ];
+
+  const wrap = document.getElementById('lang-grid-wrap');
+
+  // Left column
+  const leftCol = document.createElement('div');
+  leftCol.className = 'lang-col';
+  leftLangs.forEach(l => {
+    const cell = document.createElement('div');
+    cell.className = 'lang-cell';
+    cell.innerHTML = `<span class="lang-name">${l.name}</span><span class="lang-text">${l.text}</span>`;
+    leftCol.appendChild(cell);
+  });
+  wrap.appendChild(leftCol);
+
+  // Middle bouquet column (single merged cell)
+  const midCol = document.createElement('div');
+  midCol.className = 'bouquet-col';
+  midCol.innerHTML = `<span class="bouquet-cell">💐</span>`;
+  wrap.appendChild(midCol);
+
+  // Right column
+  const rightCol = document.createElement('div');
+  rightCol.className = 'lang-col';
+  rightLangs.forEach(l => {
+    const cell = document.createElement('div');
+    cell.className = 'lang-cell';
+    cell.innerHTML = `<span class="lang-name">${l.name}</span><span class="lang-text">${l.text}</span>`;
+    rightCol.appendChild(cell);
+  });
+  wrap.appendChild(rightCol);
+
+  /* ── Scroll Helper ── */
+  function scrollToSlide(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  /* ── Heart Click ── */
+  const heart = document.getElementById('main-heart');
+  const music = document.getElementById('bg-music');
+  let musicStarted = false;
+
+  heart.addEventListener('click', () => {
+    scrollToSlide('slide2');
+    if (!musicStarted) {
+      music.play().catch(() => {});
+      musicStarted = true;
+      document.getElementById('music-btn').textContent = '🔊';
+    }
+  });
+
+  /* ── Music Toggle Button ── */
+  const musicBtn = document.getElementById('music-btn');
+  musicBtn.addEventListener('click', () => {
+    if (music.paused) {
+      music.play().catch(() => {});
+      musicBtn.textContent = '🔊';
+      musicStarted = true;
+    } else {
+      music.pause();
+      musicBtn.textContent = '🎵';
+    }
+  });
+
+  /* ── Letter Card Intersection Observer ── */
+  const card = document.getElementById('letter-card');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) card.classList.add('visible'); });
+  }, { threshold: 0.25 });
+  observer.observe(card);
+
+  /* ── Floating Hearts ── */
+  const canvas = document.getElementById('hearts-canvas');
+  const emojis = ['❤️', '💕', '💗', '💓', '💖', '🌹', '💝'];
+
+  function spawnHeart() {
+    const el = document.createElement('div');
+    el.className = 'float-heart';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    const size = 0.8 + Math.random() * 1.2;
+    el.style.fontSize = size + 'rem';
+    el.style.left = Math.random() * 100 + 'vw';
+    const dur = 6 + Math.random() * 8;
+    const delay = Math.random() * 4;
+    el.style.animationDuration = dur + 's';
+    el.style.animationDelay = delay + 's';
+    canvas.appendChild(el);
+    setTimeout(() => el.remove(), (dur + delay + 1) * 1000);
+  }
+
+  setInterval(spawnHeart, 700);
+  for (let i = 0; i < 8; i++) setTimeout(spawnHeart, i * 200);
+
+  /* ── Sparkles on Slide 4 ── */
+  const sparkContainer = document.getElementById('sparkles');
+  for (let i = 0; i < 28; i++) {
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    s.style.top  = Math.random() * 100 + '%';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.animationDelay = (Math.random() * 3) + 's';
+    s.style.animationDuration = (2 + Math.random() * 2) + 's';
+    sparkContainer.appendChild(s);
+  }
+</script>
+</body>
+</html>
